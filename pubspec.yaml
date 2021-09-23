@@ -1,0 +1,37 @@
+name: home_cooking
+description: A new Flutter project.
+
+# Prevent accidental publishing to pub.dev.
+publish_to: "none"
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.12.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_hooks: ^0.18.0
+  flutter_intl: ^0.0.1
+  flutter_localizations:
+    sdk: flutter
+  flutter_riverpod: ^0.14.0+3
+  get: ^4.3.8
+  google_fonts: ^2.1.0
+  line_icons: ^2.0.1
+
+dev_dependencies:
+  flutter_lints: ^1.0.0
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
+
+  # Enable generation of localized Strings from arb files.
+  generate: true
+
+  assets:
+    # Add assets from the images directory to the application.
+    - assets/images/
