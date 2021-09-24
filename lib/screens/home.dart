@@ -18,7 +18,7 @@ class Home extends HookWidget {
         appBar: AppBar(
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.vertical(
-                  bottom: Radius.elliptical(Screen.width(context), .75))),
+                  bottom: Radius.elliptical(Screen.width(context), 100.0))),
           title: const Text("Home Cooking"),
           actions: [
             GestureDetector(
