@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "692085543961",
+    "project_id": "home-cooking-765b3",
+    "storage_bucket": "home-cooking-765b3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:692085543961:android:f0e4f49fae1cacf5d58688",
+        "android_client_info": {
+          "package_name": "com.eagle_groop.home_cooking"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "692085543961-nsmv75ndlon72b0ur58afhg68c59csif.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCt1XnIfXrVhIc0gxOKWoPl5qRn5QP4UQ8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "692085543961-nsmv75ndlon72b0ur58afhg68c59csif.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
