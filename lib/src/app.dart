@@ -37,10 +37,15 @@ class HomeCooking extends HookWidget {
               GlobalWidgetsLocalizations.delegate,
               GlobalCupertinoLocalizations.delegate,
             ],
+
+            ///   supportedLocales: AppLocalizations.supportedLocales,
             supportedLocales: const [
               Locale(
                 'en',
               ), // English, no country code
+              Locale(
+                'fr',
+              ),
             ],
 
             // Use AppLocalizations to configure the correct application title
