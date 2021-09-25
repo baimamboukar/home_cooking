@@ -7,4 +7,5 @@ abstract class AuthRepository {
       {required String mail,
       required String pass,
       required Cuisinier cuisinier});
+  Future<void> logoutUser();
 }
