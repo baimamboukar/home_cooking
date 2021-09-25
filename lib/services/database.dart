@@ -12,7 +12,11 @@ class Database {
   Future<bool> createUser(
       {required String id, required Cuisinier cuisinier}) async {
     try {
-      _firestore.collection('students').doc(id).set({}).then((_) async {
+      _firestore.collection('cuisinier').doc(id).set({
+        'name': cuisinier.name,
+        'adress': cuisinier.adress,
+        'email': cuisinier.email,
+      }).then((_) async {
         getUser(id);
       });
 
@@ -25,7 +29,7 @@ class Database {
   bool getUser(String uid) {
     try {
       _firestore
-          .collection('students')
+          .collection('cuisinier')
           .doc(uid)
           .get(const GetOptions(source: Source.serverAndCache))
           .then((doc) {
