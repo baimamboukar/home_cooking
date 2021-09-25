@@ -1,25 +1,29 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/get.dart';
+import 'package:home_cooking/providers/auth_providers.dart';
 import 'package:home_cooking/utils/palette.dart';
 import 'package:home_cooking/utils/styles.dart';
 import 'package:home_cooking/utils/utils.dart';
 import 'package:home_cooking/widgets/widgets.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:line_icons/line_icons.dart';
 
 final stayConnectedProvider = StateProvider<bool>((ref) => false);
 
-class Login extends ConsumerWidget {
+class Login extends HookWidget {
   const Login({Key? key}) : super(key: key);
   static const routeName = '/login';
 
   static final _formKey = GlobalKey<FormState>();
   @override
-  Widget build(BuildContext context, ScopedReader watch) {
-    final emailController = TextEditingController();
-    final passwordController = TextEditingController();
-    final stayConnected = watch(stayConnectedProvider);
+  Widget build(BuildContext context) {
+    final emailController = useTextEditingController();
+    final passwordController = useTextEditingController();
+    final stayConnected = useProvider(stayConnectedProvider);
+    final _auth = useProvider(authProvider);
 
     return SafeArea(
       child: Scaffold(
@@ -78,7 +82,7 @@ class Login extends ConsumerWidget {
                           isPassword: true,
                           isPhone: false,
                           validator: (value) {
-                            return !GetUtils.isEmail(value!)
+                            return !(value!.length >= 6)
                                 ? "Entrez un email valide"
                                 : null;
                           },
@@ -103,7 +107,39 @@ class Login extends ConsumerWidget {
                         const SizedBox(height: 10.0),
                         GestureDetector(
                           onTap: () {
-                            _formKey.currentState?.validate();
+                            if (_formKey.currentState!.validate()) {
+                              showModalBottomSheet(
+                                  backgroundColor: Colors.transparent,
+                                  barrierColor: Colors.teal.shade200,
+                                  context: context,
+                                  builder: (context) {
+                                    return Material(
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                            color: Colors.black26,
+                                            borderRadius: BorderRadius.vertical(
+                                                top: Radius.elliptical(
+                                                    Screen.width(context),
+                                                    75.0))),
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            const CircularProgressIndicator(),
+                                            const SizedBox(
+                                              height: 30.0,
+                                            ),
+                                            Text("Loading... Plese wait !",
+                                                style: Styles.subtitle)
+                                          ],
+                                        ),
+                                      ),
+                                    );
+                                  });
+                              _auth.loginUser(
+                                  mail: emailController.text,
+                                  pass: passwordController.text);
+                            }
                           },
                           child: Button(
                             label: "Login",
