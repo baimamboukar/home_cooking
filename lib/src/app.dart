@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:home_cooking/screens/screens.dart';
+import 'package:home_cooking/services/services.dart';
 import 'package:home_cooking/utils/utils.dart';
 import 'sample_feature/sample_item_details_view.dart';
 import 'sample_feature/sample_item_list_view.dart';
@@ -59,7 +61,10 @@ class HomeCooking extends HookWidget {
             // preferred ThemeMode (light, dark, or system default) from the
             // SettingsController to display the correct theme.
             theme: ThemeData(
-                primaryColor: Colors.tealAccent, primarySwatch: Colors.teal),
+                textTheme: GoogleFonts.josefinSansTextTheme(
+                    Theme.of(context).textTheme),
+                primaryColor: Colors.tealAccent,
+                primarySwatch: Colors.teal),
             darkTheme: ThemeData.dark(),
             themeMode: settingsController.themeMode,
 
@@ -83,7 +88,7 @@ class HomeCooking extends HookWidget {
                 },
               );
             },
-            home: const Home());
+            home: const Root());
       },
     );
   }
