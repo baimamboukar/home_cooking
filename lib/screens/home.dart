@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:get/get.dart';
+import 'package:home_cooking/providers/auth_providers.dart';
+import 'package:home_cooking/providers/providers.dart';
 import 'package:home_cooking/utils/palette.dart';
 import 'package:home_cooking/utils/utils.dart';
 import 'package:home_cooking/widgets/widgets.dart';
 import 'package:line_icons/line_icons.dart';
+
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class Home extends HookWidget {
   const Home({Key? key}) : super(key: key);
@@ -24,6 +28,11 @@ class Home extends HookWidget {
             GestureDetector(
                 onTap: () {
                   Get.toNamed('/login');
+                },
+                child: const Icon(LineIcons.alternateSignOut)),
+            GestureDetector(
+                onTap: () {
+                  useProvider(authProvider).logoutUser();
                 },
                 child: const Icon(LineIcons.bell))
           ],
@@ -145,7 +154,10 @@ Widget tab() {
             );
           },
         ),
-      )
+      ),
+      Center(
+          child: Text(
+              useProvider(cuisinierControllerProvider.notifier).cuisinier.name))
     ],
   ));
 }
