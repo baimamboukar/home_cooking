@@ -36,4 +36,13 @@ class AuthService extends AuthRepository {
       print(err);
     }
   }
+
+  @override
+  Future<void> logoutUser() async {
+    try {
+      await _auth.signOut();
+    } on FirebaseAuthException catch (err) {
+      print("hoha");
+    }
+  }
 }
