@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:get/utils.dart';
@@ -9,23 +10,25 @@ import 'package:home_cooking/utils/palette.dart';
 import 'package:home_cooking/utils/styles.dart';
 import 'package:home_cooking/utils/utils.dart';
 import 'package:home_cooking/widgets/widgets.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:line_icons/line_icons.dart';
 
-class Signup extends ConsumerWidget {
+class Signup extends HookWidget {
   const Signup({Key? key}) : super(key: key);
   static const routeName = '/signup';
-  static final _formKey = GlobalKey<FormState>();
+  static final _formkey = GlobalKey<FormState>();
   @override
-  Widget build(BuildContext context, ScopedReader watch) {
-    final emailController = TextEditingController();
-    final usernameController = TextEditingController();
-    final passwordController = TextEditingController();
-    final adressController = TextEditingController();
+  Widget build(BuildContext context) {
+    final emailController = useTextEditingController();
+    final usernameController = useTextEditingController();
+    final passwordController = useTextEditingController();
+    final adressController = useTextEditingController();
 
-    final _auth = watch(authProvider);
+    final _auth = useProvider(authProvider);
 
     return Scaffold(
         backgroundColor: Palette.primary,
+        resizeToAvoidBottomInset: false,
         body: SingleChildScrollView(
           child: Column(
             children: [
@@ -51,7 +54,7 @@ class Signup extends ConsumerWidget {
                     borderRadius: BorderRadius.vertical(
                         top: Radius.elliptical(Screen.width(context), 100.0))),
                 child: Form(
-                    key: _formKey,
+                    key: _formkey,
                     child: Column(children: [
                       const SizedBox(height: 30.0),
                       Input(
@@ -117,14 +120,14 @@ class Signup extends ConsumerWidget {
                       const SizedBox(height: 10.0),
                       GestureDetector(
                         onTap: () {
-                          if (_formKey.currentState!.validate()) {
+                          if (_formkey.currentState!.validate()) {
                             Cuisinier _cuisinier = Cuisinier(
-                                name: usernameController.value.text,
-                                email: emailController.value.text,
-                                adress: passwordController.value.text);
+                                name: usernameController.text,
+                                email: emailController.text,
+                                adress: passwordController.text);
                             _auth.signupUser(
-                                mail: emailController.value.text,
-                                pass: passwordController.value.text,
+                                mail: emailController.text,
+                                pass: passwordController.text,
                                 cuisinier: _cuisinier);
                           }
                         },
