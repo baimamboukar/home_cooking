@@ -37,7 +37,7 @@ class Home extends HookWidget {
                 child: const Icon(LineIcons.bell))
           ],
           bottom: PreferredSize(
-            preferredSize: Size(Screen.width(context), 170),
+            preferredSize: Size(Screen.width(context), 120),
             child: Container(
               child: Column(
                 children: [
@@ -57,23 +57,10 @@ class Home extends HookWidget {
                           borderRadius: BorderRadius.circular(8.0)),
                     ),
                   ),
-                  const SizedBox(
-                    height: 20.0,
-                  ),
-                  TabBar(
-                      tabs: [
-                        label("Pizza", LineIcons.pizzaSlice),
-                        label("Drink", Icons.local_drink),
-                        label("Pizza", LineIcons.pizzaSlice),
-                        label("Drink", Icons.local_drink)
-                      ],
-                      physics: const ClampingScrollPhysics(),
-                      indicatorColor: Palette.light,
-                      indicatorSize: TabBarIndicatorSize.label,
-                      indicatorPadding: const EdgeInsets.only(top: 10.0))
+                  const Center(child: Icon(LineIcons.pizzaSlice, size: 48.0))
                 ],
               ),
-              height: 180.0,
+              height: 150.0,
               decoration: BoxDecoration(
                   color: Colors.teal,
                   borderRadius: BorderRadius.vertical(
@@ -81,14 +68,7 @@ class Home extends HookWidget {
             ),
           ),
         ),
-        body: TabBarView(
-          children: [
-            tab(),
-            tab(),
-            tab(),
-            tab(),
-          ],
-        ),
+        body: tab(),
         bottomNavigationBar: BottomAppBar(
           shape: const CircularNotchedRectangle(),
           notchMargin: 3.0,
@@ -133,25 +113,13 @@ Widget tab() {
       const SizedBox(
         height: 10.0,
       ),
-      SizedBox(
-        height: 120.0,
+      Container(
+        height: 200.0,
         child: ListView.builder(
           scrollDirection: Axis.horizontal,
           itemCount: 10,
-          prototypeItem: Container(
-              height: 100.0,
-              width: 180.0,
-              color: Palette.secondary,
-              child: const Center(child: Icon(LineIcons.alipay))),
           itemBuilder: (context, index) {
-            return Padding(
-              padding: const EdgeInsets.all(14.0),
-              child: Container(
-                  height: 150.0,
-                  width: 200.0,
-                  color: Palette.secondary,
-                  child: const Center(child: Icon(LineIcons.alipay))),
-            );
+            return food();
           },
         ),
       ),
@@ -160,4 +128,31 @@ Widget tab() {
               useProvider(cuisinierControllerProvider.notifier).cuisinier.name))
     ],
   ));
+}
+
+Widget food() {
+  return Padding(
+    padding: const EdgeInsets.all(14.0),
+    child: Card(
+      color: Palette.primary.withOpacity(0.2),
+      child: Container(
+          height: 120.0,
+          width: 200.0,
+          child: Column(
+            children: [
+              const SizedBox(height: 20.0),
+              Image.asset("assets/images/flutter_logo.png"),
+              const Text("Nom de la recette"),
+              const Text("Cuisinier pro"),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: const [
+                  Text("Prix: \$12.0"),
+                  Icon(LineIcons.shoppingBag),
+                ],
+              )
+            ],
+          )),
+    ),
+  );
 }
