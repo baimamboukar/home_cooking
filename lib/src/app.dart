@@ -3,6 +3,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:home_cooking/models/plat.dart';
 import 'package:home_cooking/screens/screens.dart';
 import 'package:home_cooking/services/services.dart';
 import 'package:home_cooking/utils/utils.dart';
@@ -79,6 +80,8 @@ class HomeCooking extends HookWidget {
                       return const Login();
                     case Signup.routeName:
                       return const Signup();
+                    case PlatDetails.routeName:
+                      return PlatDetails(plat: routeSettings.arguments as Plat);
                     case SampleItemDetailsView.routeName:
                       return const SampleItemDetailsView();
                     case SampleItemListView.routeName:
