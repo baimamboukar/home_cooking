@@ -1,6 +1,8 @@
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:home_cooking/utils/utils.dart';
 import 'src/app.dart';
 import 'src/settings/settings_controller.dart';
 import 'src/settings/settings_service.dart';
@@ -19,7 +21,20 @@ void main() async {
   // SettingsView.
 
   WidgetsFlutterBinding.ensureInitialized();
+
   await Firebase.initializeApp();
+  AwesomeNotifications().initialize(
+      null,
+      [
+        NotificationChannel(
+            channelKey: 'test_channel',
+            channelName: 'Basic notifications',
+            channelDescription: 'Notification channel for basic tests',
+            defaultColor: Palette.primary,
+            ledColor: Colors.white)
+      ],
+      debug: true);
+
   runApp(ProviderScope(
       child: HomeCooking(settingsController: settingsController)));
 }
