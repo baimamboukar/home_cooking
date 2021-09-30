@@ -8,11 +8,16 @@ import 'package:line_icons/line_icons.dart';
 
 final numberOfCommandProvider = StateProvider<int>((ref) => 0);
 
-class PlatDetails extends HookWidget {
+class PlatDetails extends StatefulHookWidget {
   const PlatDetails({Key? key, required this.plat}) : super(key: key);
   final Plat plat;
   static const routeName = '/platdetails';
 
+  @override
+  State<PlatDetails> createState() => _PlatDetailsState();
+}
+
+class _PlatDetailsState extends State<PlatDetails> {
   @override
   Widget build(BuildContext context) {
     final numberOfCommand = useProvider(numberOfCommandProvider);
@@ -23,7 +28,7 @@ class PlatDetails extends HookWidget {
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.vertical(
                   bottom: Radius.elliptical(Screen.width(context), 100.0))),
-          title: Text(plat.name),
+          title: Text(widget.plat.name),
           expandedHeight: 150.0,
           flexibleSpace: SizedBox(
               height: 200,
@@ -34,7 +39,7 @@ class PlatDetails extends HookWidget {
                       alignment: Alignment.centerLeft,
                       child: Padding(
                         padding: const EdgeInsets.only(left: 18.0, top: 20.0),
-                        child: Text("${plat.price.toString()} \$",
+                        child: Text("${widget.plat.price.toString()} \$",
                             style: Styles.subtitle),
                       )),
                   Positioned(
@@ -42,7 +47,7 @@ class PlatDetails extends HookWidget {
                     left: (Screen.width(context) / 2) - 92,
                     child: CircleAvatar(
                       radius: 92.0,
-                      backgroundImage: AssetImage(plat.imageURL),
+                      backgroundImage: AssetImage(widget.plat.imageURL),
                     ),
                   )
                 ],
@@ -51,7 +56,7 @@ class PlatDetails extends HookWidget {
         SliverToBoxAdapter(
           child: Padding(
             padding: const EdgeInsets.only(top: 100.0, left: 10.0, right: 10.0),
-            child: Text(plat.description, style: Styles.subtitle),
+            child: Text(widget.plat.description, style: Styles.subtitle),
           ),
         ),
         SliverToBoxAdapter(
@@ -100,7 +105,7 @@ class PlatDetails extends HookWidget {
                       child: Container(
                           child: Center(
                             child: Text(
-                                "\$ ${(numberOfCommand.state * plat.price).ceilToDouble()}",
+                                "\$ ${(numberOfCommand.state * widget.plat.price).ceilToDouble()}",
                                 style: Styles.subtitle),
                           ),
                           height: 75.0,
@@ -134,12 +139,23 @@ class PlatDetails extends HookWidget {
                 label: "Commander"),
           ),
         )),
-        SliverList(
-          delegate: SliverChildBuilderDelegate(
-            (context, index) {
-              return PlatCaption(plat: plats[index]);
-            },
-            childCount: plats.length,
+        const SliverToBoxAdapter(
+          child: Text("Vous aimeriez aussi..."),
+        ),
+        SliverToBoxAdapter(
+          child: SizedBox(
+            height: 200.0,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: plats.length,
+              itemBuilder: (BuildContext context, int index) {
+                return GestureDetector(
+                    onTap: () {
+                      setState(() {});
+                    },
+                    child: PlatCaption(plat: plats[index]));
+              },
+            ),
           ),
         )
       ],
