@@ -71,8 +71,8 @@ class HomeCooking extends HookWidget {
             theme: ThemeData(
                 textTheme: GoogleFonts.josefinSansTextTheme(
                     Theme.of(context).textTheme),
-                primaryColor: Colors.tealAccent,
-                primarySwatch: Colors.amber),
+                primaryColor: Colors.cyan,
+                primarySwatch: Colors.cyan),
             darkTheme: ThemeData.dark(),
             themeMode: settingsController.themeMode,
 
