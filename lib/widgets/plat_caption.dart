@@ -17,7 +17,7 @@ class PlatCaption extends HookWidget {
       child: Padding(
         padding: const EdgeInsets.all(14.0),
         child: Card(
-          color: Palette.primary.withOpacity(0.2),
+          color: Palette.primary,
           child: AspectRatio(
             aspectRatio: 16 / 9,
             child: Container(
@@ -37,9 +37,12 @@ class PlatCaption extends HookWidget {
                               style: Styles.subtitle)),
                       Align(
                           alignment: Alignment.centerRight,
-                          child: CircleAvatar(
-                            radius: 100.0,
-                            backgroundImage: AssetImage(plat.imageURL),
+                          child: Hero(
+                            tag: DateTime.now().toString(),
+                            child: CircleAvatar(
+                              radius: 100.0,
+                              backgroundImage: AssetImage(plat.imageURL),
+                            ),
                           )),
                       Align(
                           alignment: Alignment.centerLeft,
