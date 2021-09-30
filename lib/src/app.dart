@@ -32,11 +32,11 @@ class HomeCooking extends HookWidget {
     return AnimatedBuilder(
       animation: settingsController,
       builder: (BuildContext context, Widget? child) {
-        AwesomeNotifications().actionStream.listen((receivedNotification) {
-          Get.toNamed(
-            '/login', // your page params. I recommend to you to pass all *receivedNotification* object
-          );
-        });
+        // AwesomeNotifications().actionStream.listen((receivedNotification) {
+        //   Get.toNamed(
+        //     '/login', // your page params. I recommend to you to pass all *receivedNotification* object
+        //   );
+        // });
         return GetMaterialApp(
             // Provide the generated AppLocalizations to the MaterialApp. This
             // allows descendant Widgets to display the correct translations
@@ -72,7 +72,7 @@ class HomeCooking extends HookWidget {
                 textTheme: GoogleFonts.josefinSansTextTheme(
                     Theme.of(context).textTheme),
                 primaryColor: Colors.tealAccent,
-                primarySwatch: Colors.teal),
+                primarySwatch: Colors.amber),
             darkTheme: ThemeData.dark(),
             themeMode: settingsController.themeMode,
 
