@@ -1,7 +1,12 @@
 import 'package:awesome_notifications/awesome_notifications.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class NotificationService {
   final _awesomeNotif = AwesomeNotifications();
+  final Reader _read;
+  NotificationService(
+    this._read,
+  );
   void send() {
     _awesomeNotif.isNotificationAllowed().then((isAllowed) {
       if (!isAllowed) {
