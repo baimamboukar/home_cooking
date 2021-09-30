@@ -63,7 +63,7 @@ class Home extends HookWidget {
               ),
               height: 150.0,
               decoration: BoxDecoration(
-                  color: Colors.teal,
+                  color: Palette.primary,
                   borderRadius: BorderRadius.vertical(
                       bottom: Radius.elliptical(Screen.width(context), 75.0))),
             ),
